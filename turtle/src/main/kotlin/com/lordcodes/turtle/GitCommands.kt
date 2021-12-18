@@ -244,4 +244,16 @@ class GitCommands internal constructor(
      * @throws [ShellRunException] Running the command produced error output.
      */
     fun gitCommand(arguments: List<String>): String = shell.command("git", arguments)
+
+    /**
+     * Run a Git command with the specified arguments.
+     *
+     * @param [arguments] The arguments to pass to the Git command.
+     *
+     * @return [String] The output of running the command.
+     *
+     * @throws [ShellFailedException] There was an issue running the command.
+     * @throws [ShellRunException] Running the command produced error output.
+     */
+    fun gitCommand(vararg arguments: String): String = gitCommand(arguments.asList())
 }
