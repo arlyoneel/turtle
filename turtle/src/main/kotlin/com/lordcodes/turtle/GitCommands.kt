@@ -40,6 +40,31 @@ class GitCommands internal constructor(
     fun addAll(): String = gitCommand(listOf("add", "--all"))
 
     /**
+     * Stage file or files, modified or deleted files, to be included in the next commit.
+     *
+     * @param [files] one or many files to be added.
+     *
+     * @return [String] The output of running the command.
+     *
+     * @throws [ShellFailedException] There was an issue running the command.
+     * @throws [ShellRunException] Running the command produced error output.
+     */
+    fun add(vararg files: String): String = gitCommand(listOf("add", *files))
+
+    /**
+     * Add git submodule to current git repository
+     *
+     * @param [gitUrl] Git url of the submodule.
+     * @param [path] local path where submodule will live.
+     *
+     * @return [String] The output of running the command.
+     *
+     * @throws [ShellFailedException] There was an issue running the command.
+     * @throws [ShellRunException] Running the command produced error output.
+     */
+    fun addSubmodule(gitUrl: String, path: String): String = gitCommand("submodule", "add", gitUrl, path)
+
+    /**
      * Create a Git commit with the given commit message. Any modified or deleted files will also be staged and
      * included in the commit.
      *
